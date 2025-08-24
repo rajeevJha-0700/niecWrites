@@ -8,7 +8,6 @@ import { Input, Button, RTE, Select } from './Warehouse.js'
 function PostForm({ Post_Object }) {
   const navigate = useNavigate();
   const userData = useSelector(state => state.authorization.userData);
-  const verified = userData.emailVerification;
   const { register, handleSubmit, watch, getValues, setValue, control } = useForm({
     defaultValues: {
       title: Post_Object?.title || "TITLE",
@@ -18,8 +17,9 @@ function PostForm({ Post_Object }) {
       status: Post_Object?.status || "active",
     }
   })
-
+  
   const onPostSubmit = async (data) => {
+    const verified = userData.emailVerification;
     if (Post_Object) {
      
       const file = data.image[0] ? await database.uploadFile(data.image[0]) : null;
