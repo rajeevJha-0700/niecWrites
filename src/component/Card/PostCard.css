@@ -1,0 +1,86 @@
+.post-card {
+  --card-width: 300px;
+  --card-radius: 12px;
+  --transition-speed: 0.3s;
+  --overlay-color: rgba(0, 0, 0, 0.4);
+  --hover-overlay-color: rgba(0, 0, 0, 0.6);
+  
+  width: var(--card-width);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform var(--transition-speed) ease;
+  background: white;
+  margin: 1rem;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.post-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.post-card-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.post-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-speed) ease;
+}
+
+.post-card:hover .post-card-image {
+  transform: scale(1.05);
+}
+
+.post-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-color);
+  transition: background var(--transition-speed) ease;
+}
+
+.post-card:hover .post-card-overlay {
+  background: var(--hover-overlay-color);
+}
+
+.post-card-content {
+  padding: 1.2rem;
+}
+
+.post-card-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  transition: color var(--transition-speed) ease;
+}
+
+.post-card:hover .post-card-title {
+  color: #000;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .post-card {
+    --card-width: 100%;
+    margin: 0.5rem 0;
+  }
+  
+  .post-card-image-container {
+    height: 180px;
+  }
+}
