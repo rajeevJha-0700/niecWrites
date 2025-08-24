@@ -58,7 +58,7 @@ function Home() {
             <p className="text-lg text-gray-600 mb-6">
               Be the first to share your thoughts and inspire others ✍️
             </p>
-            <Link to="/create-post">
+            <Link to="/add-post">
               <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
                 Create Your First Post
               </Button>
