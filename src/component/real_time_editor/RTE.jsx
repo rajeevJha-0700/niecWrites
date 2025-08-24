@@ -16,6 +16,7 @@ function RTE({name,control,label,defaultValue}){
             <Editor 
              id={id}
             apiKey = {config.tinymceEditor}
+
             initialValue={defaultValue}   
             init={{
                 height:500,
