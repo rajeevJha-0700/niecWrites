@@ -113,7 +113,7 @@ function Dashboard() {
 
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">
-            My Posts
+            My Logs
           </h2>
           <hr className="border-gray-200 mb-6" />
           <MyPost className="space-y-6" />
