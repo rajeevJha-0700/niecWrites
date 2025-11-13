@@ -87,6 +87,16 @@ export default function Post() {
           </div>
         )}
 
+        {
+          !isAuthor && (
+             <Link to={`/users/${post.userID}`}>
+              <button className="text-sm uppercase tracking-wider border border-black px-6 py-2 hover:bg-black hover:text-white transition">
+                about the author
+              </button>
+            </Link>
+          )
+        }
+
         {/* BACK LINK */}
         <div className="mt-16 text-center">
           <button
