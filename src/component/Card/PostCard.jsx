@@ -1,27 +1,34 @@
 import { Link } from "react-router-dom";
-import database from '../../Service/DatabaseService.js';
-import './PostCard.css';
+import database from "../../Service/DatabaseService.js";
 
-function PostCard({ $id, title, featuredImage,username,userID }) {
+function PostCard({ $id, title, featuredImage, username, userID }) {
   return (
-    <div className="post-card">
-      <Link to={`/post/${$id}`} className="post-card-link"> 
-        <div className="post-card-image-container">
-          <img 
-            src={database.fileView(featuredImage)} 
+    <div className="group">
+      <Link to={`/post/${$id}`} className="block">
+        {/* Image */}
+        <div className="mb-4 overflow-hidden">
+          <img
+            src={database.fileView(featuredImage)}
             alt={title}
-            className="post-card-image"
+            className="w-full h-48 object-cover transition-opacity group-hover:opacity-90"
           />
-          <div className="post-card-overlay"></div>
         </div>
-        <div className="post-card-content">
-          <h2 className="post-card-title">{title}</h2>
-        </div>
-       </Link>
-        <div className="text-xs font-semibold text-gray-400 tracking-wider uppercase border-b border-gray-200 pb-1 inline-block">
-           <Link to={`/users/${userID}`} className="hover:bg-amber-300">author_{username}</Link>
-        </div>
-       
+
+        {/* Title */}
+        <h2 className="text-xl font-bold text-black line-clamp-2 group-hover:underline">
+          {title}
+        </h2>
+      </Link>
+
+      {/* Author */}
+      <div className="mt-3">
+        <Link
+          to={`/users/${userID}`}
+          className="text-xs font-medium text-gray-600 uppercase tracking-wider hover:text-black transition"
+        >
+          {username ? `by ${username}` : "Anonymous"}
+        </Link>
+      </div>
     </div>
   );
 }

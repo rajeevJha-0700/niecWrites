@@ -8,7 +8,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { AuthLayout, Login , Home,Add_Post,Signup,Edit_Post,Post,All_Post, Dashboard } from './component/Warehouse.js'
 import GoToUser from './component/GoToUser.jsx'
 
-
+import PageNotFound from './component/404.jsx'
 
 
 const router = createBrowserRouter([
@@ -83,6 +83,12 @@ const router = createBrowserRouter([
             <AuthLayout authentication ={true}>
                 <GoToUser/>
             </AuthLayout>
+          )
+        },
+        {
+          path: "*",
+          element: (
+                <PageNotFound/>
           )
         }
     ],

@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux"
 import './App.css'
 import authService from "./Service/AuthService.js"
 import {Footer,Header} from "./component/Warehouse.js"
-import { Outlet } from 'react-router-dom'
+import { Outlet,ScrollRestoration } from 'react-router-dom'
 function App() {
   const [loading,setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -24,7 +24,9 @@ function App() {
   },[])
 
   return !loading ? (
-     <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+    <>
+    <ScrollRestoration/>
+    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
       <div className='w-full block'>
         <Header />
         <main>
@@ -33,6 +35,7 @@ function App() {
         <Footer />
       </div>
     </div>
+    </>
   ) : null;
 }
 

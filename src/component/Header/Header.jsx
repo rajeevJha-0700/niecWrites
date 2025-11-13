@@ -28,7 +28,7 @@ function Header() {
             className="text-3xl font-extrabold tracking-tight cursor-pointer bg-gradient-to-r from-black via-blue-400 to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
             onClick={() => navigate("/")}
           >
-            niec<span className="text-blue-700 font-serif">Writes</span>
+            sem<span className="text-blue-700 font-serif">buzz</span>
           </div>
 
           {/* Desktop Navigation */}

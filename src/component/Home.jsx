@@ -1,8 +1,7 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import database from "../Service/DatabaseService.js";
-import { Container, Button, PostCard } from "./Warehouse.js";
-
+import { Container, PostCard } from "./Warehouse.js";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -10,24 +9,20 @@ function Home() {
 
   useEffect(() => {
     setLoading(true);
-    database.getAllPost().then((posts) => {
-      if (posts) {
-        if (posts.documents.length > 6) {
-        const homePost2 = posts.documents.slice(0, 6); 
-        setPosts(homePost2);
-    } else {
-        setPosts(posts.documents); 
-    }
+    database.getAllPost().then((res) => {
+      if (res?.documents) {
+        const limited = res.documents.slice(0, 6);
+        setPosts(limited);
       }
       setLoading(false);
     });
   }, []);
-   
-  // Loading UI
+
+  // Loading
   if (loading) {
     return (
-      <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -35,57 +30,54 @@ function Home() {
   // Empty State
   if (posts.length === 0) {
     return (
-      <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center py-20">
-        <Container className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center bg-white rounded-xl shadow-lg p-8">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-20 w-20 text-gray-400 mx-auto mb-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 19V6a2 2 0 012-2h3l2-2h4l2 2h3a2 2 0 012 2v13a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-              />
-            </svg>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-              No Posts Yet!
-            </h1>
-            <p className="text-lg text-gray-600 mb-6">
-              Be the first to share your thoughts and inspire others ✍️
-            </p>
-            <Link to="/add-post">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
-                Create Your First Post
-              </Button>
-            </Link>
-          </div>
+      <div className="min-h-screen bg-white flex items-center justify-center px-4">
+        <Container className="max-w-2xl text-center py-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">
+            No stories yet.
+          </h1>
+          <p className="text-lg text-gray-600 mb-8">
+            Be the first to write something worth reading.
+          </p>
+          <Link
+            to="/add-post"
+            className="inline-block border border-black px-6 py-3 text-sm uppercase tracking-wider hover:bg-black hover:text-white transition"
+          >
+            Write a Story
+          </Link>
         </Container>
       </div>
     );
   }
 
-  // Posts Grid
+  // Home Grid
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-gray-50 to-gray-100 py-12 sm:py-16">
-      <Container className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-         <h1 className="text-4xl sm:text-5xl font-extrabold text-center bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-6 drop-shadow-md">
+    <div className="min-h-screen bg-white">
+      <Container className="max-w-6xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+        <header className="mb-16 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight">
             Hypes of the Weekend
           </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {
-          posts.map((post) => (
-            <div
-              key={post.$id}
-              className="w-full transform transition duration-300 hover:-translate-y-2"
-            >
+          <p className="mt-4 text-lg text-gray-600">
+            Fresh ideas, every week
+          </p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <article key={post.$id} className="border-b border-gray-200 pb-8 last:border-0">
               <PostCard {...post} />
-            </div>
+            </article>
           ))}
+        </div>
+
+        {/* See All */}
+        <div className="mt-16 text-center">
+          <Link
+            to="/all-posts"
+            className="text-sm uppercase tracking-wider border-b border-black pb-1 hover:text-gray-600"
+          >
+            See all stories →
+          </Link>
         </div>
       </Container>
     </div>
